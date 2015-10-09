@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 
 {%block css%}
+label{
+  min-width:117px;
+
+}
+textarea{
+  height: 28px;
+}
+li{
+  ;
+  height: 28px;
+}
 {%endblock%}
 
 {%block content%}
@@ -8,69 +19,17 @@
       <div class="jumbotron">
         <p class="centerButtons">
           Datos de la solicitud
-        </p>
-        <p>
-          <ul class="nav">
-            <li><div class="input-group">
-            <span class="input-group-addon input-group-addon-p" id="basic-addon1">Id</span>
-            <input type="text" class="form-control" placeholder="ID Cliente" aria-describedby="basic-addon1" id="IdClient"disabled>
-          </div>
-        </li>
-        <li><div class="input-group">
-            <span class="input-group-addon input-group-addon-p" id="basic-addon1">Dirección Origen</span>
-            <input type="text" class="form-control" placeholder="Dirección Origen" aria-describedby="basic-addon1" id="DirOrig">
-          </div>
-        </li>
-        <li><div class="input-group">
-            <span class="input-group-addon input-group-addon-p" id="basic-addon1">Dirección Destino</span>
-            <input type="text" class="form-control" placeholder="Dirección Destino" aria-describedby="basic-addon1" id="DirDest">
-          </div>
-        </li>
-        <li><span><div class="input-group">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="input-group">
-                  <div class="input-group-btn">
-                    <button id="typebut" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tipo de tramite <span class="caret"></span></button>
-                    <ul class="dropdown-menu dropdown-menu-1">
-                      
-                      <li>
-                        <div class="input-group">
-                              <span class="input-group-addon">
-                                <input name="radio1" value="Opcion1" id="Opcion1" type="radio" aria-label="Encomienda" onClick="validacionTipo();">
-                              </span>
-                              <input type="text" class="form-control" aria-label="Encomienda" disabled placeholder="Encomienda" >
-                            </div>
-                      </li>
-                      <li>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                <input name="radio1" value="Opcion2" id="Opcion2" type="radio" aria-label="Tramite Personal" onClick="validacionTipo();">
-                              </span>
-                              <input type="text" class="form-control" aria-label="Tramite Personal" disabled placeholder="Tramite Personal">
-                            </div>
-                      </li>
-                      
-                    </ul>
-                  </div></span>
-            <input type="text" class="form-control" placeholder="Tipo Trámite" aria-describedby="basic-addon1" id="TipoT" disabled>
-          </div>
-        </li>
-        <li><div class="input-group">
-            <span class="input-group-addon input-group-addon-p" id="basic-addon1">Descripción</span>
-            <input type="text" class="form-control" placeholder="Descripción" aria-describedby="basic-addon1" id="Descripcion">
-          </div>
-        </li>
-          </ul>
-        </p>
-        <div class="div80" align="middle">
-          
-        <a href="#"><button type="button" class="btn-info btn-lg btn-info"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Enviar</button><a>
-        <a href="./"> <button type="button" class="btn-info btn-lg btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Cancelar</button></a>
-      
-      </div>
-      </div>
+          <form action="#" method="post">{% csrf_token %}
+            <ul>
 
+            {{ form.as_ul }}
+
+            </ul>
+
+            <input type="submit" name="submit" value="Crear Solicitud">
+            </form>
+      </p>
+      </div>  
     </div>
 {%endblock%}
 
