@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{%block body%}
+<nav>
+    <a href="/?m=menu1.html">menu1</a>
+    <a href="/?m=menu2.html">menu2</a>
+</nav>
+<section>
+    {% block bodymenu %}{% endblock %}
+</section>
+{%endblock%}
+{%block style%}
+    .a{color:red}
+    {%block menu_style%}{% endblock %}
+{%endblock%}
