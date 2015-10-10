@@ -2,12 +2,21 @@ from django.db import models
 
 ENCOMIENDA = "ENCOMIENDA"
 TRAMITE = "TRAMITE"
+PENDIENTE = "PENDIENTE"
+EN_PROCESO = "EN_PROCESO"
+ENTREGADO = "ENTREGADO"
 
 # cada tupla tiene esta estrucura: (DATO_EN_DB, DATO_MIRA_USUARIO)
 TIPO_SOLICITUD = (
     (ENCOMIENDA, 'Encomienda'),
     (TRAMITE, 'Tramite'),
 )
+
+ESTADO_SOLICITUD = (
+    (PENDIENTE, 'Pendiente'),
+    (EN_PROCESO, 'En proceso'),
+    (ENTREGADO, 'Entregado'),
+    )
 
 class Solicitud(models.Model):
     tipo = models.CharField(max_length=20, choices=TIPO_SOLICITUD, default=ENCOMIENDA)
@@ -18,6 +27,7 @@ class Solicitud(models.Model):
     dir_destino = models.CharField(max_length=200)
     descripcion = models.TextField()
     observaciones = models.TextField(null=True, blank=True)
+    estado = models.CharField(max_length=20, choices=ESTADO_SOLICITUD, default=PENDIENTE)
 
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)

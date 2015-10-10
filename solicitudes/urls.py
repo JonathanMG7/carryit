@@ -4,5 +4,6 @@ from solicitudes import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^lista/', views.lista, name='lista'),
     
 ]

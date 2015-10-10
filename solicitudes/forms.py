@@ -6,3 +6,9 @@ class SolicitudForm(forms.ModelForm):
    class Meta:
       model = Solicitud
       fields = [ 'tipo', 'id_cliente', 'nom_cliente', 'tel_cliente', 'dir_origen', 'dir_destino', 'descripcion']
+
+class ListaSolicitudes(forms.ModelForm):
+
+   class Meta:
+      model = Solicitud
+      fields = [ 'tipo', 'id_cliente', 'dir_origen', 'dir_destino', 'descripcion', 'observaciones', 'estado']

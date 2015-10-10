@@ -2,7 +2,7 @@
 {% load bootstrap %}
 
 {%block title%}
-Realizar solicitud
+Lista Solicitudes
 {%endblock%}
 {% block importaciones %}
 
@@ -21,16 +21,17 @@ Realizar solicitud
 <div class="container">
       <div class="jumbotron">
         <p class="centerButtons">
-          Datos de la solicitud
-          <form action="#" method="post">{% csrf_token %}
+          Lista de solicitudes
+          <form action="#" method="get">{% csrf_token %}
             <ul>
 
-            {{ form|bootstrap }}
+            {{ forma.as_table }}
             
           
             </ul>
-            <input type="submit" class="btn btn-default" name="submit" value="Crear Solicitud">
+            <input type="get" class="btn btn-default" name="get" value="Mostrar">
             </form>
+          
       </p>
       </div>  
     </div>
