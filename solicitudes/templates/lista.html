@@ -6,13 +6,18 @@ Lista Solicitudes
 {%endblock%}
 {% block importaciones %}
 
-    {% endblock %}
+
+{%endblock%}
 
 {%block css%}
 .form-control{
   width: 90%;
 }
+
+
 {%endblock%}
+
+
 
 {%block content%}
 
@@ -22,20 +27,58 @@ Lista Solicitudes
       <div class="jumbotron">
         <p class="centerButtons">
           Lista de solicitudes
-          <form action="#" method="get">{% csrf_token %}
-            <ul>
+          
+          <table id="table" >
+              <tr>
+                  <th>Direccion Origen</th>
+                  <th>Tipo</th>
+                  <th>Nombre</th>
+                  <th>Direccion Destino</th>
+                  <th>Estado</th>
 
-            {{ forma.as_table }}
-            
-          
-            </ul>
-            <input type="get" class="btn btn-default" name="get" value="Mostrar">
-            </form>
-          
+              </tr>
+          </table>
       </p>
       </div>  
     </div>
 {%endblock%}
 
 {%block js%}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="jquery-1.11.3.min.js"></script>
+
+
+<script>
+  $(document).ready(function() {
+         $('#table').dataTable( {
+
+
+             "processing": true,
+             "ajaxsource": {
+                 "processing": true,
+                 "url": "{% url 'listas' %}",
+                 "dataSrc": ""
+             },
+
+             "columns": [
+                     { "data": "dir_origen" },
+                     { "data": "tipo" },
+                     { "data": "nom_cliente" },
+                     { "data": "dir_destino" },
+                     { "data": "estado" }
+                     
+                 ]
+         } );
+     } );
+  </script>
+
+<script>
+window.onload = function() {
+  document.getElementById('lsol').className = 'active';
+};
+
+
+
+</script>
+
 {%endblock%}

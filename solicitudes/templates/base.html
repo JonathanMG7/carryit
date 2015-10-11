@@ -1,8 +1,6 @@
-<!-- {% load staticfiles %} -->
+{% load staticfiles %}
 {% load bootstrap %}
-
 <!DOCTYPE html>
-<html lang="es">
 
   <head>
     <meta charset="utf-8">
@@ -24,7 +22,9 @@
     
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static "css/personal.css" %}">
+    <link rel="stylesheet" href="{% static "jquery/media/css/jquery.dataTables.min.css" %}">
 
+    
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -42,7 +42,7 @@
 
   <body>
   
-
+  
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -56,8 +56,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/solicitudes/">Crear solicitud</a></li>
-            <li><a href="/solicitudes/lista/">Lista de solicitudes</a></li>
+            <li id="csol" ><a href="/solicitudes/">Crear solicitud</a></li>
+            <li id="lsol"><a href="/solicitudes/lista/">Lista de solicitudes</a></li>
             
           </ul>
         </div><!--/.nav-collapse -->
@@ -71,13 +71,16 @@
   {% endblock %}
     <!-- /.container -->
 
-  {% block js %}
-  {% endblock %}
+ 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{ % static "js/bootstrap.js" % }"></script>
+    <script src="{ % static "jquery/media/js/jquery.js" % }"></script>
+    <script src="{ % static "jquery/media/js/jquery.dataTables.js" % }"></script>
+  {% block js %}
+  {% endblock %}
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     
   </body>

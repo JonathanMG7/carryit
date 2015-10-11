@@ -7,6 +7,9 @@ from django.core.context_processors import csrf
 from django.db import connection
 from django.contrib import messages
 from solicitudes.models import Solicitud
+from django.core import serializers
+import json
+from models import *
 
 
 cursor = connection.cursor()
@@ -31,11 +34,11 @@ def index(request):
 
     return render_to_response('index.html', args)
 
+def lista_asJson(request):
+
+	data = Solicitud.objects.all()
+	json = serializers.serialize("json", data)
+	return HttpResponse(json, content_type='application/json')
+
 def lista(request):
-	Solicitud.objects.all()
-	if request.GET:
-		show = ListaSolicitudes(request.GET)
-	args = {}
-	args.update(csrf(request))
-	args['forma'] = show
-	return render_to_response('lista.html', args) 
+	return render(request, 'lista.html', locals())
