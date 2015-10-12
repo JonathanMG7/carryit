@@ -18,6 +18,7 @@ ESTADO_SOLICITUD = (
     (ENTREGADO, 'Entregado'),
     )
 
+
 class Solicitud(models.Model):
     tipo = models.CharField(max_length=20, choices=TIPO_SOLICITUD, default=ENCOMIENDA)
     id_cliente = models.CharField(max_length=20)
@@ -33,6 +34,5 @@ class Solicitud(models.Model):
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-    	# return self.tipo + " - " + self.descripcion[:10]
-    	return "{}{}".format(self.tipo[0:1], self.pk)
-
+        # return self.tipo + " - " + self.descripcion[:10]
+        return "{}{}".format(self.tipo[0:1], self.pk)
