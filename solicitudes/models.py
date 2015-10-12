@@ -1,3 +1,5 @@
+# encoding:utf-8
+
 from django.db import models
 
 ENCOMIENDA = "ENCOMIENDA"
@@ -20,6 +22,7 @@ ESTADO_SOLICITUD = (
 
 
 class Solicitud(models.Model):
+    guia = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20, choices=TIPO_SOLICITUD, default=ENCOMIENDA)
     id_cliente = models.CharField(max_length=20)
     nom_cliente = models.CharField(max_length=50)
@@ -33,6 +36,13 @@ class Solicitud(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        # Se contruye el valor de self.guia antes de que se guarde el modelo (linea super)
+        self.guia = u"{}{}".format(self.tipo[0:1], self.pk)
+
+        # permite que se ejecute el método save de la clase padre "models.Model"
+        super(Solicitud, self).save(*args, **kwargs)
+
     def __unicode__(self):
         # return self.tipo + " - " + self.descripcion[:10]
-        return "{}{}".format(self.tipo[0:1], self.pk)
+        return self.guia
