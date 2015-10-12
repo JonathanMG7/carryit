@@ -1,4 +1,6 @@
 # encoding:utf-8
+from .utils import get_timestamp
+from random import randint
 
 from django.db import models
 
@@ -37,8 +39,11 @@ class Solicitud(models.Model):
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        # Se contruye el valor de self.guia antes de que se guarde el modelo (linea super)
-        self.guia = u"{}{}".format(self.tipo[0:1], self.pk)
+        # Se reescribe self.guia solo si no existe un pk
+        if self.pk is None:
+            # Se contruye el valor de self.guia antes de que se guarde el modelo (linea super)
+            r = get_timestamp() + randint(0, 9)
+            self.guia = u"{}{}".format(self.tipo[0:1], r)
 
         # permite que se ejecute el método save de la clase padre "models.Model"
         super(Solicitud, self).save(*args, **kwargs)
