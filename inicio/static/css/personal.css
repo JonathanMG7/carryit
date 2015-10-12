@@ -1,0 +1,22 @@
+body{
+	padding-top: 55px;
+
+}
+
+/*.input-group-addon-p, #typebut{
+	min-width: 136px;
+}*/
+
+.centerButtons{
+	text-align:center;
+}
+
+#LogoC{
+	margin-top:-11px;
+	width:78px;
+}
+
+.dropdown-menu-1{
+    height: 70px;
+    padding-top: 0px;
+}

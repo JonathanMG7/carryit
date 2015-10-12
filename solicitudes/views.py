@@ -36,9 +36,9 @@ def index(request):
 
 def lista_asJson(request):
 
-	data = Solicitud.objects.all()
-	json = serializers.serialize("json", data)
-	return HttpResponse(json, content_type='application/json')
+    data = Solicitud.objects.all()
+    json = serializers.serialize("json", data)
+    return HttpResponse(json, content_type='application/json')
 
 def lista(request):
-	return render(request, 'lista.html', locals())
+    return render(request, 'lista.html', locals())

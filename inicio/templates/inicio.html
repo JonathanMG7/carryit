@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+
+{%block title%}
+INICIO
+{%endblock%}
+{% block importaciones %}
+
+    {% endblock %}
+
+{%block css%}
+
+{%endblock%}
+
+
+
+{%block content%}
+
+
+
+<div class="container">
+      <div class="jumbotron">
+        <p class="centerButtons">
+          <h1>CARRY IT!</h1>
+          <div id="buttonsRedirect">
+          <p>
+          <a href="/solicitudes/"><button type="button" class="btn btn-lg btn-success">Crear solicitud</button></a>
+          <a href="/solicitudes/lista/"><button type="button" class="btn btn-lg btn-success">Mostrar solicitudes</button></a>
+          <a href="/admin/"><button type="button" class="btn btn-lg btn-warning">Admin</button></a>
+          </p>
+
+          </div>
+      </p>
+      </div>  
+    </div>
+{%endblock%}
+
+{%block js%}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+window.onload = function() {
+  document.getElementById('ini').className = 'active';
+};
+
+</script>
+{%endblock%}

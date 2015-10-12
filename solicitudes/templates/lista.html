@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% load eztables %}
 {% load bootstrap %}
 
 {%block title%}
 Lista Solicitudes
 {%endblock%}
 {% block importaciones %}
+<link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
 
 
 {%endblock%}
@@ -27,58 +29,49 @@ Lista Solicitudes
       <div class="jumbotron">
         <p class="centerButtons">
           Lista de solicitudes
-          
+        </p>
           <table id="table" >
+            <thead>
               <tr>
-                  <th>Direccion Origen</th>
+                  <th>Dirección Origen</th>
                   <th>Tipo</th>
                   <th>Nombre</th>
-                  <th>Direccion Destino</th>
+                  <th>Dirección Destino</th>
                   <th>Estado</th>
-
               </tr>
+            </thead>
           </table>
-      </p>
       </div>  
     </div>
 {%endblock%}
 
-{%block js%}
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="jquery-1.11.3.min.js"></script>
+  <script src="jquery-1.11.3.min.js"></script>
+  <script>
+    $(document).ready(function() {
+           $('#table').dataTable( {
+               "processing": true,
+               "ajaxsource": {
+                   "processing": true,
+                   "url": "{% url 'listas' %}",
+                   "dataSrc": ""
+               },
+               "columns": [
+                       { "data": "dir_origen" },
+                       { "data": "tipo" },
+                       { "data": "nom_cliente" },
+                       { "data": "dir_destino" },
+                       { "data": "estado" }
+                       
+                   ]
+           } );
+       } );
+    </script>
 
-
-<script>
-  $(document).ready(function() {
-         $('#table').dataTable( {
-
-
-             "processing": true,
-             "ajaxsource": {
-                 "processing": true,
-                 "url": "{% url 'listas' %}",
-                 "dataSrc": ""
-             },
-
-             "columns": [
-                     { "data": "dir_origen" },
-                     { "data": "tipo" },
-                     { "data": "nom_cliente" },
-                     { "data": "dir_destino" },
-                     { "data": "estado" }
-                     
-                 ]
-         } );
-     } );
+  <script>
+    window.onload = function() {
+      document.getElementById('lsol').className = 'active';
+    };
   </script>
-
-<script>
-window.onload = function() {
-  document.getElementById('lsol').className = 'active';
-};
-
-
-
-</script>
 
 {%endblock%}
