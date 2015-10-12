@@ -43,12 +43,12 @@
     $(document).ready(function() {
            $('#table').dataTable( {
                "processing": true,
-               "ajaxsource": {
+               "ajax": {
                    "processing": true,
                    "url": "{% url 'listas' %}",
                    "dataSrc": ""
                },
-               "columns": [
+               "#columns": [
                        { "data": "dir_origen" },
                        { "data": "tipo" },
                        { "data": "nom_cliente" },

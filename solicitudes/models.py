@@ -34,5 +34,5 @@ class Solicitud(models.Model):
 
     def __unicode__(self):
     	# return self.tipo + " - " + self.descripcion[:10]
-    	# return "{} - {}...".format(self.tipo, self.descripcion[:10])
-        return self.tipo
+    	return "{}{}".format(self.tipo[0:1], self.pk)
+
