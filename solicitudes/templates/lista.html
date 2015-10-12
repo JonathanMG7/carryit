@@ -1,84 +1,72 @@
 {% extends "base.html" %}
 {% load bootstrap %}
 
-{%block title%}
-Lista Solicitudes
-{%endblock%}
+{%block title%}Lista Solicitudes{%endblock%}
+
 {% block importaciones %}
-
-
 {%endblock%}
 
 {%block css%}
-.form-control{
-  width: 90%;
-}
-
-
+  <style type="text/css">
+    .form-control{
+      width: 90%;
+    }
+  </style>
 {%endblock%}
 
 
-
 {%block content%}
-
-
-
-<div class="container">
+    <div class="container">
       <div class="jumbotron">
         <p class="centerButtons">
           Lista de solicitudes
-          
+        </p>
           <table id="table" >
+            <thead>
               <tr>
-                  <th>Direccion Origen</th>
+                  <th>Dirección Origen</th>
                   <th>Tipo</th>
                   <th>Nombre</th>
-                  <th>Direccion Destino</th>
+                  <th>Dirección Destino</th>
                   <th>Estado</th>
-
               </tr>
+            </thead>
           </table>
-      </p>
       </div>  
     </div>
 {%endblock%}
 
 {%block js%}
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="jquery-1.11.3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="jquery-1.11.3.min.js"></script>
+  <script>
+    $(document).ready(function() {
+           $('#table').dataTable( {
 
 
-<script>
-  $(document).ready(function() {
-         $('#table').dataTable( {
+               "processing": true,
+               "ajaxsource": {
+                   "processing": true,
+                   "url": "{% url 'listas' %}",
+                   "dataSrc": ""
+               },
 
+               "columns": [
+                       { "data": "dir_origen" },
+                       { "data": "tipo" },
+                       { "data": "nom_cliente" },
+                       { "data": "dir_destino" },
+                       { "data": "estado" }
+                       
+                   ]
+           } );
+       } );
+    </script>
 
-             "processing": true,
-             "ajaxsource": {
-                 "processing": true,
-                 "url": "{% url 'listas' %}",
-                 "dataSrc": ""
-             },
-
-             "columns": [
-                     { "data": "dir_origen" },
-                     { "data": "tipo" },
-                     { "data": "nom_cliente" },
-                     { "data": "dir_destino" },
-                     { "data": "estado" }
-                     
-                 ]
-         } );
-     } );
+  <script>
+    window.onload = function() {
+      document.getElementById('lsol').className = 'active';
+    };
   </script>
-
-<script>
-window.onload = function() {
-  document.getElementById('lsol').className = 'active';
-};
-
-
-
-</script>
 
 {%endblock%}
