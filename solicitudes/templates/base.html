@@ -12,8 +12,6 @@
     <link rel="icon" href="{% static "favicon.ico" %}">
 
     <title>{% block title %}  {% endblock %}</title>
-    {% block importaciones %}
-    {% endblock %}
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
     
@@ -23,6 +21,8 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static "css/personal.css" %}">
     <link rel="stylesheet" href="{% static "jquery/media/css/jquery.dataTables.min.css" %}">
+    {% block importaciones %}
+    {% endblock %}
 
     
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -34,15 +34,11 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
     {% block css %}
     {% endblock %}
-    </style>
   </head>
 
   <body>
-  
-  
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -66,20 +62,27 @@
     </nav>
   
 
-  {% block content %}
-   
-
-  {% endblock %}
+    {% block content %}
+    {% endblock %}
     <!-- /.container -->
 
  
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+<<<<<<< HEAD
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
   {% block js %}
   {% endblock %}
+=======
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
+    <script src="{% static "jquery/media/js/jquery.js" %}"></script>
+    <script src="{% static "jquery/media/js/jquery.dataTables.js" %}"></script>
+    {% block js %}
+    {% endblock %}
+>>>>>>> a572ff2ce480deebf211bd9e6e24bf01a14ed113
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     
   </body>

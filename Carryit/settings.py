@@ -39,17 +39,16 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'solicitudes',
     'bootstrapform',
+<<<<<<< HEAD
     'django_tables2',
     'djangojs',
     'eztables',
     'inicio',    
 
 
+=======
+>>>>>>> a572ff2ce480deebf211bd9e6e24bf01a14ed113
 )
-
-TEMPLATE_LOADERS =(
-    'django.template.loaders.eggs.Loader',
-    )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,6 +76,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request'
             ],
+            'debug': DEBUG,
+            # 'loaders': [
+            #     'django.template.loaders.eggs.Loader',
+            # ]
         },
     },
 ]
@@ -113,4 +116,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-

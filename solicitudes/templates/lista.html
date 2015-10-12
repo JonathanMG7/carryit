@@ -2,30 +2,31 @@
 {% load eztables %}
 {% load bootstrap %}
 
+<<<<<<< HEAD
 {%block title%}
 Lista Solicitudes
 {%endblock%}
 {% block importaciones %}
 <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
 
+=======
+{%block title%}Lista Solicitudes{%endblock%}
+>>>>>>> a572ff2ce480deebf211bd9e6e24bf01a14ed113
 
+{% block importaciones %}
 {%endblock%}
 
 {%block css%}
-.form-control{
-  width: 90%;
-}
-
-
+  <style type="text/css">
+    .form-control{
+      width: 90%;
+    }
+  </style>
 {%endblock%}
 
 
-
 {%block content%}
-
-
-
-<div class="container">
+    <div class="container">
       <div class="jumbotron">
         <p class="centerButtons">
           Lista de solicitudes
@@ -45,17 +46,31 @@ Lista Solicitudes
     </div>
 {%endblock%}
 
+<<<<<<< HEAD
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+=======
+{%block js%}
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+>>>>>>> a572ff2ce480deebf211bd9e6e24bf01a14ed113
   <script src="jquery-1.11.3.min.js"></script>
   <script>
     $(document).ready(function() {
            $('#table').dataTable( {
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a572ff2ce480deebf211bd9e6e24bf01a14ed113
                "processing": true,
                "ajaxsource": {
                    "processing": true,
                    "url": "{% url 'listas' %}",
                    "dataSrc": ""
                },
+<<<<<<< HEAD
+=======
+
+>>>>>>> a572ff2ce480deebf211bd9e6e24bf01a14ed113
                "columns": [
                        { "data": "dir_origen" },
                        { "data": "tipo" },
