@@ -24,10 +24,8 @@
           <table id="table" >
             <thead>
               <tr>
-                  <th>Dirección Origen</th>
-                  <th>Tipo</th>
-                  <th>Nombre</th>
-                  <th>Dirección Destino</th>
+                  <th># Guía</th>
+                  <th>Cliente</th>
                   <th>Estado</th>
               </tr>
             </thead>
@@ -46,10 +44,8 @@
                    "url": "{% url 'listas' %}",
                },
                "columns": [
-                       { "data": "dir_origen" },
-                       { "data": "tipo" },
+                       { "data": "guia" },
                        { "data": "nom_cliente" },
-                       { "data": "dir_destino" },
                        { "data": "estado" }
                        
                    ]
@@ -62,5 +58,4 @@
       document.getElementById('lsol').className = 'active';
     };
   </script>
-
 {%endblock%}

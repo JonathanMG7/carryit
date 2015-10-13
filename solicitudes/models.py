@@ -35,7 +35,7 @@ class Solicitud(models.Model):
     observaciones = models.TextField(null=True, blank=True)
     estado = models.CharField(max_length=20, choices=ESTADO_SOLICITUD, default=PENDIENTE)
 
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True, max_length=15)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
@@ -44,10 +44,10 @@ class Solicitud(models.Model):
             # Se contruye el valor de self.guia antes de que se guarde el modelo (linea super)
             r = get_timestamp() + randint(0, 9)
             self.guia = u"{}{}".format(self.tipo[0:1], r)
-
         # permite que se ejecute el método save de la clase padre "models.Model"
         super(Solicitud, self).save(*args, **kwargs)
 
     def __unicode__(self):
         # return self.tipo + " - " + self.descripcion[:10]
         return self.guia
+    
