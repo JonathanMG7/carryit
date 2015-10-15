@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load static %}
+{%block title%}Solicitud almacenada{%endblock%}
+
+{% block importaciones %}
+{%endblock%}
+
+{%block css%}
+  <style type="text/css">
+    .form-control{
+      width: 90%;
+    }
+  </style>
+{%endblock%}
+
+
+{%block content%}
+    <div class="container centerButtons">
+    <div id="buttonsRedirect">
+          <p>
+          <a href="/solicitudes/"><button type="button" class="btn btn-lg btn-success">Crear otra solicitud</button></a>
+          <a href="/"><button type="button" class="btn btn-lg btn-success">Inicio</button></a>
+          </p>
+
+          </div>
+      <img id="confirmLogo"src="{% static "img/confirm.png" %}"alt="Logo CarryIt"/>
+      
+    </div>
+{%endblock%}
+
+{%block js%}
+
+{%endblock%}

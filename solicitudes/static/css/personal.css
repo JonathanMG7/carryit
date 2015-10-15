@@ -1,12 +1,7 @@
 body{
-	padding-top: 55px;
+	padding-top: 81px;
 
 }
-
-/*.input-group-addon-p, #typebut{
-	min-width: 136px;
-}*/
-
 .centerButtons{
 	text-align:center;
 }
@@ -19,4 +14,10 @@ body{
 .dropdown-menu-1{
     height: 70px;
     padding-top: 0px;
+}
+#confirmLogo{
+	max-width: 300px;
+}
+.navbar{
+	z-index: 9999999;
 }

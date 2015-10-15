@@ -22,6 +22,10 @@ ESTADO_SOLICITUD = (
     (ENTREGADO, 'Entregado'),
     )
 
+class SolicitudManager(models.Manager):
+
+    def get_solicitudes_as_json(self):
+        return self.filter(estado="PENDIENTE").values("guia", "nom_cliente", "estado")
 
 class Solicitud(models.Model):
     guia = models.CharField(max_length=20)
@@ -37,6 +41,11 @@ class Solicitud(models.Model):
 
     fecha_creacion = models.DateTimeField(auto_now_add=True, max_length=15)
     fecha_modificacion = models.DateTimeField(auto_now=True)
+
+    objects = SolicitudManager()
+
+    def get_guia(self):
+        return self.guia
 
     def save(self, *args, **kwargs):
         # Se reescribe self.guia solo si no existe un pk

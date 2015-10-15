@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load bootstrap %}
+{% load humanize %}
 <!DOCTYPE html>
 
   <head>
@@ -60,7 +61,9 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-  
+    {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message|safe }}</div>
+          {% endfor %}
     {% block content %}
     {% endblock %}
     <!-- /.container -->
