@@ -24,6 +24,16 @@ ESTADO_SOLICITUD = (
 
 class SolicitudManager(models.Manager):
 
+    def get_by_client_id(self, client_id):
+        return self.filter(id_cliente=client_id)
+
+    def get_by_client_guia(self, guia):
+        try:
+            return self.get(guia=guia)
+        except Exception, e:
+            print 'ERROR:', e
+            return None
+
     def get_solicitudes_as_json(self):
         return self.filter(estado="PENDIENTE").values("guia", "nom_cliente", "estado")
 
