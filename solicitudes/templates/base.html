@@ -54,16 +54,20 @@
           <ul class="nav navbar-nav">
             <li id="ini" ><a href="/">Inicio</a></li>
             <li id="csol" ><a href="/solicitudes/">Crear solicitud</a></li>
+            {% if request.user.is_authenticated %}
             <li id="lsol"><a href="/solicitudes/lista/">Lista de solicitudes</a></li>
-                      
+            {% if request.user.is_superuser %}
+            <li id="rmsj"><a href="/sign/up/">Registrar mensajero</a></li>
+            {% endif %}
+            {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
           {% if request.user.is_authenticated %}
           <li><a href="#">Bienvenido, {{ request.user.username }}.</a></li>
-          <li><a href="/log/out">Log out</a></li>
+          <li><a href="/sign/out">Log out</a></li>
           {% else %}
 
-          <li><a href="/log/in">Log in</a></li>
+          <li><a href="/sign/in">Log in</a></li>
           {% endif %}
           </ul>
 

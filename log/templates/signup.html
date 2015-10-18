@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block title %}Registrar mensajero{% endblock %}
+
+{% block importaciones %}
+
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+  .form-control{
+    width: 90%;
+  }
+  .btn-default{
+    width: 100%;
+  }
+</style>
+{% endblock %}
+
+
+{%block content%}
+    <div class="container">
+        <div class="jumbotron">
+        <p class="centerButtons">
+        {% if request.user.is_superuser %}
+          Datos del mensajero
+
+
+            <form method="POST" action="">
+            {% csrf_token %}
+            {{userform|bootstrap}}
+      
+            <input type="submit" class="btn btn-default" name="submit" value="Registrar">
+            </form>
+            {% else %}
+            <h1>No eres administrador y no tienes permisos para registrar mensajeros</h1>
+            <h2>Si eres usuario administrador y estas viendo este mensaje, comunicate con el administrador del sistema</h2>
+            {% endif %}
+      </p>
+      </div>  
+    </div>
+
+{%endblock%}
+
+{%block js%}
+  <!-- // <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+   <script>
+    window.onload = function() {
+      document.getElementById('csol').className = 'active';
+
+    };
+  </script>
+  
+{%endblock%}

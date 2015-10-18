@@ -20,5 +20,5 @@ urlpatterns = [
     url(r'^$', include("inicio.urls")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^solicitudes/', include("solicitudes.urls")),
-    url(r'^log/', include("log.urls"))
+    url(r'^sign/', include("log.urls"))
 ]

@@ -14,7 +14,7 @@
 {% block content %}
 <div class="jumbotron">
     <div id="login">
-        <form class="form-horizontal" name="LoginForm" action="/log/in/" method="post">
+        <form class="form-horizontal" name="LoginForm" action="/sign/in/" method="post">
         {% csrf_token %}
         {% if next %}
             <input type="hidden" name="next" value="{{ next }}" />
