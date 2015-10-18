@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'solicitudes',
     'bootstrapform',
     'inicio',
+    'log'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,4 +107,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = '/admin/login'
+LOGIN_URL = '/log/in'

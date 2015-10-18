@@ -57,20 +57,13 @@
             <li id="lsol"><a href="/solicitudes/lista/">Lista de solicitudes</a></li>
                       
           </ul>
-          <ul class="nav navbar-right">
+          <ul class="nav navbar-nav navbar-right">
           {% if request.user.is_authenticated %}
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ request.user.username }} <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            {% if request.user.is_superuser %}
-            <li><a href="/admin">Admin</a></li>
-            <li role="separator" class="divider"></li>
-            {% endif %}
-            <li><a href="/solicitudes/lista">Lista de solicitudes</a></li>
+          <li><a href="#">Bienvenido, {{ request.user.username }}.</a></li>
+          <li><a href="/log/out">Log out</a></li>
+          {% else %}
 
-            
-          </ul>
-          </li>
+          <li><a href="/log/in">Log in</a></li>
           {% endif %}
           </ul>
 
