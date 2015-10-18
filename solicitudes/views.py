@@ -1,7 +1,7 @@
 # encoding:utf-8
 from django.shortcuts import render, render_to_response
 from django.http import JsonResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from forms import SolicitudForm, ListaSolicitudes
@@ -29,7 +29,6 @@ def index(request):
 
 def lista_asJson(request):
 
-    # values hace que los datos se retornen como un diccionario python, no como objetos tipo Solicitud
     data = Solicitud.objects.get_solicitudes_as_json()
 
     # la estructura json que espera jQuery.dataTable es: [{"data": []}]
@@ -46,3 +45,17 @@ def lista(request):
 
 def confirm(request):
     return render(request, 'confirm.html', locals())
+
+def get_guia_asJson(request):
+    b = request.GET.get("busqueda")
+    data = Solicitud.objects.get_by_client_guia(b)
+    data_to_jdt = {'data': list(data)}
+    return JsonResponse(data_to_jdt, safe=False)
+
+    
+def get_guia(request):
+    b = request.GET.get("busqueda")
+    solicitud = Solicitud.objects.get_by_client_guia(b)
+    #c = solicitud.estado
+    # return HttpResponse(solicitud)
+    return render(request, 'get_guia.html', locals())

@@ -1,0 +1,20 @@
+<body>
+    <div class="container">
+      <div class="jumbotron">
+        <p class="centerButtons">
+          Resultados para {{b}}
+        </p>
+        {% if solicitud %}
+        <span>Solicitado por: {{ solicitud.nom_cliente }}</span><hr>
+        <span>Estado: {{ solicitud.estado }}</span><hr>
+        <span>Solicitado: {{ solicitud.fecha_creacion }}</span><hr>
+  
+{% else %}
+  <hr><span>No existe la guía: {{ b }}</span>
+{% endif %}
+
+          
+      </div>  
+    </div>
+</body>
+

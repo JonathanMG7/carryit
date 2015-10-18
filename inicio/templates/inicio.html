@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {%block title%}INICIO{%endblock%}
 {% block importaciones %}
+
 {% endblock %}
 
 {%block css%}
@@ -14,11 +15,17 @@
   .btn{
     margin:10px;
   }
+  .modal-dialog{
+    margin-top: 66px;
+  }
+  
+  
 </style>
 {%endblock%}
 
 {%block content%}
 <div class="container">
+      
       <div class="jumbotron">
         <p class="centerButtons">
           <h1 class="carryColor">Bienvenido a <b><i>Carry It!</i></b></h1>
@@ -31,11 +38,41 @@
           <a href="/solicitudes/lista/"><button type="button" class="btn btn-lg btn-success">Mostrar solicitudes</button></a>
           <a href="/admin/"><button type="button" class="btn btn-lg btn-warning">Admin</button></a>
           {% endif %}
-          </p>
 
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Busca por Guía
+          </button>
+<!-- modal form, busqueda por guia -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Busca por guia</h4>
+                </div>
+                <div class="modal-body">
+                            <form method="get" action="/solicitudes/busca/get_guia" id="busqueda_form" >
+                              <input type="text" class="form-control" name="busqueda" placeholder="Busca por guia" id="busqueda"/>
+                              <input type="submit" class="btn btn-primary" value="Buscar"  />
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            </form>
+                            <div id="dialog"></div>
+
+                </div>
+                
+              </div>
+            </div>
+          </div>
+<!-- modal form, busqueda por guia -->
+
+
+          
+          </p>
+            
           </div>
       </p>
       </div>  
+      
     </div>
 {%endblock%}
 
@@ -46,5 +83,24 @@ window.onload = function() {
   document.getElementById('ini').className = 'active';
 };
 
+
+$("#busqueda_form").on("submit", function(e){
+   e.preventDefault();
+   var b = $("#busqueda").val();
+   var url = $(this).attr("action");
+   $.get(url + "?busqueda=" + b, function( data ) {
+        console.log(data); // en data debe llegar la respuesta del view
+        // alert(data);
+        $("#dialog").html( data );
+    })
+
+});
 </script>
+
+<script >
+
+
+
+</script>
+
 {%endblock%}

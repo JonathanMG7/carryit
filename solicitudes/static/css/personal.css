@@ -21,3 +21,8 @@ body{
 .navbar{
 	z-index: 9999999;
 }
+
+.navbar-form {  
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
