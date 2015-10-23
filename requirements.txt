@@ -1,0 +1,4 @@
+Django==1.8.5
+django-admin-bootstrapped==2.5.6
+django-bootstrap-form==3.2
+ipython>=4.0.0
