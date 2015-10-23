@@ -1,20 +1,19 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.contrib.auth import logout
-from django.shortcuts import render_to_response, RequestContext
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.http import *
-from django.shortcuts import render_to_response,redirect
-from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from forms import UserForm, ClientForm, ClientProfile
-from django.contrib.auth.forms import UserCreationForm
 
 
 # Create your views here.
 def logoutView(request):
     logout(request)
     return HttpResponseRedirect("/#")
+
 
 def loginView(request):
     logout(request)
@@ -28,7 +27,8 @@ def loginView(request):
             if user.is_active:
                 login(request, user)
                 return HttpResponseRedirect('/#')
-    return render_to_response('login.html', context_instance=RequestContext(request))
+    return render(request, 'login.html', locals())
+
 
 @login_required
 def signup(request):
@@ -36,29 +36,31 @@ def signup(request):
         form = UserForm(request.POST, prefix='user')
         if form.is_valid():
             user = form.save()
-            return HttpResponseRedirect("/#")
+            return HttpResponseRedirect("/#{}".format(user.username))
     else:
         form = UserForm(prefix='user')
-    # return render_to_response('signup.html',  dict(userform=form, context_instance=RequestContext(request)))
 
+    return render(request, "signup.html",  {'userform': form})
 
-    return render_to_response("signup.html",  {'userform': form,  }, context_instance = RequestContext(request))
 
 def singclient(request):
     if request.method == 'POST':
-        form1 = ClientForm(request.POST, prefix='user')
-        form2 = ClientProfile(request.POST, prefix='UserProfile')
-        if form1.is_valid() and form2.is_valid():
-            user = form1.save(commit=False)
-            UserProfile = form2.save()
-            UserProfile.user = user
-            UserProfile.save()
-            return HttpResponseRedirect("/#")
+        user_form = ClientForm(request.POST, prefix='user')
+        profile_form = ClientProfile(request.POST, prefix='UserProfile')
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_obj = user_form.save()
+            user_profile = profile_form.save(commit=False)
+            user_profile.user = user_obj
+            user_profile.save()
+
+            login_url = reverse("sign:entrar")
+            url_to_redirect = u"{0}?username={1}".format(login_url, user_obj.username)
+            return HttpResponseRedirect(url_to_redirect)
     else:
-        form1 = ClientForm(prefix='user')
-        form2 = ClientProfile(prefix='UserProfile')
-    # return render_to_response('signup.html',  dict(userform=form, context_instance=RequestContext(request)))
+        user_form = ClientForm(prefix='user')
+        profile_form = ClientProfile(prefix='UserProfile')
 
+    ctx = {'clientform': user_form, 'ClientProfile': profile_form}
 
-    return render_to_response("regclient.html",  {'clientform': form1,'ClientProfile': form2,  }, context_instance = RequestContext(request))
-    
+    return render(request, "regclient.html",  ctx)

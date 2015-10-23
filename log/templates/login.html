@@ -40,3 +40,35 @@
     </div>
     </div>
 {% endblock %}
+
+{% block js %}
+<script>
+    function hasHash(hash) {
+        if(window.location.hash && window.location.hash == hash){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+
+
+    $(document).ready(function(){
+        var user = getUrlVars().username;
+        if (typeof user != "undefined"){
+            $("#username").val(user);
+            $("#password").focus();
+        }else{
+            console.log("No se encontró la variable 'username' en la url");
+        }
+    });
+</script>
+{% endblock %}
