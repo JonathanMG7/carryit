@@ -52,6 +52,8 @@ class Solicitud(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True, max_length=15)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
+    mensajero = models.CharField(max_length=10, default=0)
+
     objects = SolicitudManager()
 
     def get_guia(self):

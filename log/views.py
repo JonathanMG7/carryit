@@ -7,7 +7,7 @@ from django.http import *
 from django.shortcuts import render_to_response,redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from forms import UserForm
+from forms import UserForm, ClientForm, ClientProfile
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -43,3 +43,22 @@ def signup(request):
 
 
     return render_to_response("signup.html",  {'userform': form,  }, context_instance = RequestContext(request))
+
+def singclient(request):
+    if request.method == 'POST':
+        form1 = ClientForm(request.POST, prefix='user')
+        form2 = ClientProfile(request.POST, prefix='UserProfile')
+        if form1.is_valid() and form2.is_valid():
+            user = form1.save(commit=False)
+            UserProfile = form2.save()
+            UserProfile.user = user
+            UserProfile.save()
+            return HttpResponseRedirect("/#")
+    else:
+        form1 = ClientForm(prefix='user')
+        form2 = ClientProfile(prefix='UserProfile')
+    # return render_to_response('signup.html',  dict(userform=form, context_instance=RequestContext(request)))
+
+
+    return render_to_response("regclient.html",  {'clientform': form1,'ClientProfile': form2,  }, context_instance = RequestContext(request))
+    

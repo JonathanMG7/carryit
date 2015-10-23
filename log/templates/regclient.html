@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load bootstrap %}
 
-{% block title %}Realizar solicitud{% endblock %}
+{% block title %}Registrarse{% endblock %}
 
 {% block importaciones %}
 
@@ -23,16 +23,24 @@
     <div class="container">
         <div class="jumbotron">
         <p class="centerButtons">
-          Datos de la solicitud
-          <form action="#" method="post" onload="loadImage()">{% csrf_token %}
-            <ul>
-
-            {{ form|bootstrap }}
+        {% if request.user.is_superuser %}
+          <h1>Ya estas registrado</h1>
+            <h2>Si estas viendo esto por error, por favor cierra sesion y registrate.</h2>
+            {% else %}
             
-          
-            </ul>
-            <input type="submit" class="btn btn-default" name="submit" value="Crear Solicitud">
+          Datos del usuario
+
+
+            <form method="POST" action="">
+            {% csrf_token %}
+            {{clientform|bootstrap}}
+            {{ClientProfile|bootstrap}}
+      
+            <input type="submit" class="btn btn-default" name="submit" value="Registrar">
             </form>
+            {% endif %}
+            
+            
       </p>
       </div>  
     </div>
@@ -44,14 +52,8 @@
    <script>
     window.onload = function() {
       document.getElementById('csol').className = 'active';
-      // $("#id_nom_cliente").val({user.first_name});
-      $("#id_nom_cliente").val('{{ request.user.first_name }}');
 
     };
-  </script>
-
-  <script>
-
   </script>
   
 {%endblock%}

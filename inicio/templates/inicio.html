@@ -32,9 +32,14 @@
           <div id="buttonsRedirect">
           <p>
           <a href="/solicitudes/"><button type="button" class="btn btn-lg btn-success">Crear solicitud</button></a>
+
+          {% if user.is_authenticated %}
           {% if user.is_superuser %}
           <a href="/solicitudes/lista/"><button type="button" class="btn btn-lg btn-success">Mostrar solicitudes</button></a>
           <a href="/admin/"><button type="button" class="btn btn-lg btn-warning">Admin</button></a>
+          {% endif %}
+          {% else %}
+          <a href="/sign/client/"><button type="button" class="btn btn-lg btn-warning">Registrarse</button></a>
           {% endif %}
 
           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
