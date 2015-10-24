@@ -16,6 +16,8 @@
 
 
 {%block content%}
+    <div id="dialog">
+    </div>
     <div class="container">
       <div class="jumbotron">
         <p class="centerButtons">
@@ -41,16 +43,33 @@
                "processing": true,
                "ajax": {
                    "processing": true,
-                   "url": "{% url 'listas' %}",
+                   "url": "{% url 'solicitudes:listas' %}",
                },
+               "columnDefs": [
+            {
+                // The `data` parameter refers to the data for the cell (defined by the
+                // `data` option, which defaults to the column being worked with, in
+                // this case `data: 0`.
+                "render": function ( data, type, row ) {
+                    return data + '   ' +'<button type="button" class="btn btn-default btn-right" onClick="takeData(this)">Tomar</button>'
+                },
+                "targets": 1
+            },
+                        // { "visible": false,  "targets": [ 2 ] }
+        ],
                "columns": [
                        { "data": "guia" },
-                       { "data": "nom_cliente" },
+                       // { "data": "nom_cliente" },
                        { "data": "estado" }
-                       
+
                    ]
            } );
        } );
+
+      function takeData(dato) {
+        var Dato = $(dato).parent().parent().find(".sorting_1").html(); 
+        $("#dialog").html( "Buenos dias " + Dato + " Esta solicitud sera tramitada por: " + {{ request.user.pk }} );
+        }
     </script>
 
   <script>
@@ -58,4 +77,5 @@
       document.getElementById('lsol').className = 'active';
     };
   </script>
+
 {%endblock%}

@@ -35,7 +35,7 @@ class SolicitudManager(models.Manager):
             return None
 
     def get_solicitudes_as_json(self):
-        return self.filter(estado="PENDIENTE").values("guia", "nom_cliente", "estado")
+        return self.values("guia", "nom_cliente", "estado")
 
 class Solicitud(models.Model):
     guia = models.CharField(max_length=20)

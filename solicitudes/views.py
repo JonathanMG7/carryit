@@ -23,7 +23,6 @@ def index(request):
             return HttpResponseRedirect("confirm")
     else:
         form = SolicitudForm()
-
     return render(request, 'index.html', locals())
 
 

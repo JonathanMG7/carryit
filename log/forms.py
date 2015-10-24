@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from log.models import UserProfile
+from log.models import Profile
 
 
 class UserForm(UserCreationForm):
@@ -23,5 +23,5 @@ class ClientForm(UserCreationForm):
 
 class ClientProfile(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = Profile
         exclude = ['user']

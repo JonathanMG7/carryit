@@ -44,9 +44,10 @@
    <script>
     window.onload = function() {
       document.getElementById('csol').className = 'active';
-      // $("#id_nom_cliente").val({user.first_name});
+      $("#id_id_cliente").val('{{  request.user.prof.cedula }}');
       $("#id_nom_cliente").val('{{ request.user.first_name }}');
-
+      $("#id_tel_cliente").val('{{ request.user.prof.phone_numer }}');
+      $("#id_dir_origen").val('{{ request.user.prof.home_address }}');
     };
   </script>
 

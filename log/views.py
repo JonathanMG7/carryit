@@ -46,7 +46,7 @@ def signup(request):
 def singclient(request):
     if request.method == 'POST':
         user_form = ClientForm(request.POST, prefix='user')
-        profile_form = ClientProfile(request.POST, prefix='UserProfile')
+        profile_form = ClientProfile(request.POST, prefix='Profile')
 
         if user_form.is_valid() and profile_form.is_valid():
             user_obj = user_form.save()
@@ -59,7 +59,7 @@ def singclient(request):
             return HttpResponseRedirect(url_to_redirect)
     else:
         user_form = ClientForm(prefix='user')
-        profile_form = ClientProfile(prefix='UserProfile')
+        profile_form = ClientProfile(prefix='Profile')
 
     ctx = {'clientform': user_form, 'ClientProfile': profile_form}
 

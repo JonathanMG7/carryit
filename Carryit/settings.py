@@ -108,5 +108,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/sign/in'
-
-AUTH_PROFILE_MODULE = 'log.UserProfile'
