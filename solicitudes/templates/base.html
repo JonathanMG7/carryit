@@ -21,9 +21,6 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static "css/personal.css" %}">
     <link rel="stylesheet" href="{% static "jquery/media/css/jquery.dataTables.min.css" %}">
-
-    <script src="{% static "sweetalert-tests/dist/sweetalert.min.js" %}"></script>
-    <link rel="stylesheet" href="{% static "sweetalert-tests/dist/sweetalert.css" %}">
     {% block importaciones %}
     {% endblock %}
 
@@ -60,6 +57,7 @@
             {% if request.user.is_authenticated %}
             <li id="lsol"><a href="/solicitudes/lista/">Lista de solicitudes</a></li>
             {% if request.user.is_superuser %}
+            <li id="rmsj"><a href="/solicitudes/admin/lista/">Lista Admin</a></li>
             <li id="rmsj"><a href="/sign/up/">Registrar usuario</a></li>
             {% endif %}
             {% endif %}

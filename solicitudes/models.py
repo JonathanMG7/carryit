@@ -1,7 +1,7 @@
 # encoding:utf-8
 from .utils import get_timestamp
 from random import randint
-
+from django.db.models import Q
 from django.db import models
 
 ENCOMIENDA = "ENCOMIENDA"
@@ -38,7 +38,7 @@ class SolicitudManager(models.Manager):
         return self.filter(estado="PENDIENTE", mensajero=0).values("guia", "fecha_creacion", "estado")
 
     def get_solicitudes_as_json_msj(self, id):
-        return self.filter(mensajero=id).values("guia", "dir_origen", "dir_destino")
+        return self.filter(mensajero=id).filter(~Q(estado="ENTREGADO")).values("guia", "dir_origen", "dir_destino")
 
     def get_solicitudes_as_json_adm(self):
         return self.values("guia", "fecha_creacion", "estado")

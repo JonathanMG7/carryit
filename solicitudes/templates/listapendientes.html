@@ -21,7 +21,8 @@
     <div class="container">
       <div class="jumbotron">
         <p class="centerButtons">
-          Lista de solicitudes
+          <h1> Hola, {{ request.user.username }}.</h1>
+          <h2> Esta es tu lista de solicitudes pendientes o en proceso. </h2>
         </p>
         {% if request.user.groups.all.0.name == 'Administrador' %}
           <h1>Espacio reservado para mensajeros!</h1>

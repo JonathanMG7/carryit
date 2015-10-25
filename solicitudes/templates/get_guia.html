@@ -6,8 +6,10 @@
         </p>
         {% if solicitud %}
         <span>Solicitado por: {{ solicitud.nom_cliente }}</span><hr>
-        <span>Estado: {{ solicitud.estado }}</span><hr>
         <span>Solicitado: {{ solicitud.fecha_creacion }}</span><hr>
+        <span>Estado: {{ solicitud.estado }}</span><hr>
+        <span>Actualizado: {{ solicitud.fecha_modificacion }}</span><hr>
+        <span>ID Encargado: {{ solicitud.mensajero }}</span><hr>
         <span>Observaciones: {{ solicitud.observaciones }}</span>
   
 {% else %}
