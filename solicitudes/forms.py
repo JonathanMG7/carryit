@@ -14,3 +14,15 @@ class ListaSolicitudes(forms.ModelForm):
     class Meta:
         model = Solicitud
         fields = ['tipo', 'id_cliente', 'dir_origen', 'dir_destino', 'descripcion', 'observaciones', 'estado']
+
+class SolicitudFormModif(forms.ModelForm):
+
+    class Meta:
+        model = Solicitud
+        fields = ['tipo', 'guia', 'dir_origen', 'dir_destino', 'descripcion', 'mensajero']
+
+class CambiaEstado(forms.ModelForm):
+
+    class Meta:
+        model = Solicitud
+        fields = ['tipo', 'guia', 'dir_origen', 'dir_destino', 'observaciones', 'estado']

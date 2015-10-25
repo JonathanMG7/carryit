@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{%block title%}Lista Solicitudes{%endblock%}
+
+{% block importaciones %}
+{%endblock%}
+
+{%block css%}
+  <style type="text/css">
+    .form-control{
+      width: 90%;
+    }
+  </style>
+{%endblock%}
+
+
+{%block content%}
+    <div id="dialog">
+    </div>
+    <div class="container">
+      <div class="jumbotron">
+        <p class="centerButtons">
+          Lista de solicitudes
+        </p>
+        {% if request.user.groups.all.0.name == 'Administrador' %}
+          <h1>Espacio reservado para mensajeros!</h1>
+
+        {% else %}
+
+        {% if request.user.groups.all.0.name == 'Mensajero' %}
+          <table id="tableMsj" >
+            <thead>
+              <tr>
+                  <th>Guia</th>
+                  <th>Origen</th>
+                  <th>Destino</th>
+              </tr>
+            </thead>
+          </table>
+          {% endif %}
+          {% endif %}
+
+      </div>  
+    </div>
+{%endblock%}
+
+{%block js%}
+  <script>
+    $(document).ready(function() {
+           $('#tableMsj').dataTable( {
+               "processing": true,
+               "ajax": {
+                   "processing": true,
+                   "url": "{% url 'solicitudes:listasmsj' %}",
+               },
+               "columnDefs": [
+            {
+
+                "render": function ( data, type, row ) {
+                    return '<button type="button" class="btn btn-default btn-right" onClick="takeData(this)">Modificar</button>' + ' ' + data
+                },
+                "targets": 1
+            },
+        ],
+               "columns": [
+                       { "data": "guia" },
+                       { "data": "dir_origen" },
+                       { "data": "dir_destino" },
+                   ]
+           } );
+       } );
+
+      
+      function takeData(dato) {
+        var Dato = $(dato).parent().parent().find(".sorting_1").html(); 
+        mensajero = {{ request.user.pk }};
+        var url = "/solicitudes/cambiarestado"
+        window.location.replace(url+"?busqueda=" + Dato)    
+        }
+        
+    </script>
+
+  <script>
+    window.onload = function() {
+      document.getElementById('lsol').className = 'active';
+    };
+  </script>
+
+{%endblock%}
