@@ -29,6 +29,10 @@ body{
 navbar{
 	background-color: #FFFFFF;
 }
+
+.navbar-nav{
+    background-color: #fffeee;
+}
     .comentario{
     border-bottom-style: dotted;
     border-bottom-color: gray;

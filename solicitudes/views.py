@@ -171,7 +171,7 @@ def actualizar(request):
             mod.guia = guia
             mod.dir_origen = dir_origen
             mod.dir_destino = dir_destino
-            mod.comentario = observaciones
+            mod.observaciones = observaciones
             mod.estado = estado
             mod.save()
             return HttpResponseRedirect('/solicitudes/lista/')
