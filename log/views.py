@@ -63,4 +63,4 @@ def singclient(request):
 
     ctx = {'clientform': user_form, 'ClientProfile': profile_form}
 
-    return render(request, "regclient.html",  ctx)
+    return render(request, "regclient.html",  ctx, {'comform': form2})

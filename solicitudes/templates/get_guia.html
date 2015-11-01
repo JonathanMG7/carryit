@@ -11,7 +11,8 @@
         <span>Actualizado: {{ solicitud.fecha_modificacion }}</span><hr>
         <span>ID Encargado: {{ solicitud.mensajero }}</span><hr>
         <span>Observaciones: {{ solicitud.observaciones }}</span>
-  
+
+       
 {% else %}
   <hr><span>No existe la guía: {{ b }}</span>
 {% endif %}
@@ -21,3 +22,8 @@
     </div>
 </body>
 
+{%block js%}
+<script>
+    
+    </script>
+{% endblock %}

@@ -14,4 +14,5 @@ urlpatterns = (
     url(r'^admin/lista/', views.listaAdmin, name='listaAdmin'),
     url(r'^listasmsj/', views.lista_asJson_msj, name='listasmsj'),
     url(r'^listas_msj/', views.lista_msj, name='listas_msj'),
+    url(r'^get_comentario_asJson/$', views.get_comentario_asJson, name='get_comentario_asJson'),
 )

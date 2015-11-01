@@ -16,6 +16,9 @@
   .modal-dialog{
     margin-top: 66px;
   }
+  .modal-content{
+    background-color: #eee;
+  }
   
   
 </style>
@@ -55,11 +58,14 @@
                 </div>
                 <div class="modal-body">
                             <form method="get" action="/solicitudes/busca/get_guia" id="busqueda_form" >
+                            <!-- <form method="get" action="/solicitudes/comentarios/" id="busqueda_form" > -->
                               <input type="text" class="form-control" name="busqueda" placeholder="Busca por guia" id="busqueda"/>
                               <input type="submit" class="btn btn-primary" value="Buscar"  />
                               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             </form>
                             <div id="dialog"></div>
+                            <div id="divId">
+                            </div>
 
                 </div>
                 
@@ -84,6 +90,7 @@
 <script>
 window.onload = function() {
   document.getElementById('ini').className = 'active';
+  $("#divId").css('display', 'none')
 };
 
 
@@ -95,9 +102,45 @@ $("#busqueda_form").on("submit", function(e){
         console.log(data); // en data debe llegar la respuesta del view
         // alert(data);
         $("#dialog").html( data );
+        var bguia = getUrlVars()["busqueda"];
+    var url = "/solicitudes/get_comentario_asJson/" + "?buscar=" + b;
+    $("#divId").html("");
+    $.getJSON(url, function(result){
+        for(key in result) {
+         if(result.hasOwnProperty(key)) {
+          var value = result[key];
+          for (i in value){
+              $("#divId").append("<div class='fecha'>" + value[i].fecha + "<br /> </div>"); 
+              $("#divId").append("<div class='comentario'>" + value[i].comentario + "." + " </div> ");
+              $("#divId").css('display', 'block') 
+            }
+          }
+        }
+    });
     })
 
 });
-</script>
+  function getUrlVars()
+    {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+
+            if($.inArray(hash[0], vars)>-1)
+            {
+                vars[hash[0]]+=","+hash[1];
+            }
+            else
+            {
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+        }
+
+        return vars;
+    }
+  </script>
 
 {%endblock%}

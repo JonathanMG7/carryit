@@ -29,3 +29,18 @@ body{
 navbar{
 	background-color: #FFFFFF;
 }
+    .comentario{
+    border-bottom-style: dotted;
+    border-bottom-color: gray;
+    color: black;
+    font-size: x-large;
+    }
+    .fecha{
+      font-size: smaller;
+    }
+    #divId{
+    
+    padding: 10px;
+    border-style: outset;
+    border-color: #eee;
+    }

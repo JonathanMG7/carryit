@@ -1,5 +1,5 @@
 from django import forms
-from solicitudes.models import Solicitud
+from solicitudes.models import Solicitud, Comentarios
 
 
 class SolicitudForm(forms.ModelForm):
@@ -26,3 +26,9 @@ class CambiaEstado(forms.ModelForm):
     class Meta:
         model = Solicitud
         fields = ['tipo', 'guia', 'dir_origen', 'dir_destino', 'observaciones', 'estado']
+
+class NuevoComent(forms.ModelForm):
+
+    class Meta:
+        model = Comentarios
+        fields = ['guia', 'comentario']

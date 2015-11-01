@@ -19,6 +19,9 @@
   #myModal .container{
     display:inline;
   }
+    .modal-content{
+    background-color: #eee;
+  }
 
 
   </style>
@@ -62,6 +65,7 @@
                 </div>
                 <div class="modal-body">
                             <div id="dialogA"></div>
+                            <div id="divId">holi</div>
 
                 </div>
                 
@@ -106,14 +110,28 @@
         var Dato = $(dato).parent().parent().find(".sorting_1").html(); 
         var url = "/solicitudes/busca/get_guia"
         $.get(url + "?busqueda=" + Dato, function( data ) {
-        console.log(data); // en data debe llegar la respuesta del view
-        // alert(data);
+        console.log(data); 
         $("#dialogA").html( data );
-    })
-        }
-    </script>
+        var url1 = "/solicitudes/get_comentario_asJson/" + "?buscar=" + Dato;
+        $("#divId").html("");
+        $.getJSON(url1, function(result){
+        for(key in result) {
+         if(result.hasOwnProperty(key)) {
+          var value = result[key];
+          for (i in value){
+              $("#divId").append("<div class='fecha'>" + value[i].fecha + "<br /> </div>"); 
+              $("#divId").append("<div class='comentario'>" + value[i].comentario + "." + " </div> ");
+              $("#divId").css('display', 'block')
+              console.log(value[i].fecha)
+              console.log(value[i].comentario)
 
-  <script>
+            }
+          }
+        }
+    });
+    })
+    }
+
     window.onload = function() {
       document.getElementById('lsol').className = 'active';
     };

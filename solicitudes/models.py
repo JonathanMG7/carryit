@@ -3,6 +3,7 @@ from .utils import get_timestamp
 from random import randint
 from django.db.models import Q
 from django.db import models
+from django.contrib.auth.models import User
 
 ENCOMIENDA = "ENCOMIENDA"
 TRAMITE = "TRAMITE"
@@ -43,6 +44,11 @@ class SolicitudManager(models.Manager):
     def get_solicitudes_as_json_adm(self):
         return self.values("guia", "fecha_creacion", "estado")
 
+class comentarioManager(models.Manager):
+    
+    def get_comentario_as_json(self, guia):
+        return self.filter(guia=guia).values("fecha", "comentario")
+
 class Solicitud(models.Model):
     guia = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20, choices=TIPO_SOLICITUD, default=ENCOMIENDA)
@@ -77,4 +83,17 @@ class Solicitud(models.Model):
     def __unicode__(self):
         # return self.tipo + " - " + self.descripcion[:10]
         return self.guia
-    
+
+class Comentarios(models.Model):
+    guia = models.CharField(max_length=20)
+    fecha = models.DateTimeField(auto_now_add=True, max_length=15)
+    comentario = models.TextField(null=False, blank=True)
+
+    objects = comentarioManager()
+
+    def save(self, *args, **kwargs):
+        super(Comentarios, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        # return self.tipo + " - " + self.descripcion[:10]
+        return self.guia

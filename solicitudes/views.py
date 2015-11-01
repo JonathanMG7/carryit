@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from forms import SolicitudForm, ListaSolicitudes, SolicitudFormModif, CambiaEstado
+from forms import SolicitudForm, ListaSolicitudes, SolicitudFormModif, CambiaEstado, NuevoComent
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
@@ -106,11 +106,13 @@ def asignarme(request):
     return render(request, "asignarme.html",  ctx)
 
 def cambiaestado(request):
-    guia = request.GET.get("busqueda")
+    guia = request.GET['busqueda']
     mod = Solicitud.objects.get(guia=guia)
+    variable = mod.guia
     if request.method =='POST':
         form = CambiaEstado(request.POST,request.FILES)
-        if form.is_valid():
+        form2 = NuevoComent(request.POST)
+        if form.is_valid() and form2.is_valid():
             tipo = form.cleaned_data['tipo']
             guia = form.cleaned_data['guia']
             dir_origen = form.cleaned_data['dir_origen']
@@ -122,9 +124,14 @@ def cambiaestado(request):
             mod.dir_origen = dir_origen
             mod.dir_destino = dir_destino
             mod.observaciones = observaciones
+            form2.comentario = observaciones
             mod.estado = estado
             mod.save()
+            if request.POST['comentario'] != "":
+                com = form2.save()
             return HttpResponseRedirect('/solicitudes/listas_msj/')
+    else:
+        form2= NuevoComent()
     if request.method == 'GET':
         form = CambiaEstado(initial={
                                 'tipo':mod.tipo,
@@ -135,5 +142,13 @@ def cambiaestado(request):
                                 'estado':mod.estado
 
             })
+    
     ctx = {'form': form, 'Solicitud': mod}
-    return render(request, "aentrega.html",  ctx)
+    return render(request, "aentrega.html",  locals())
+
+def get_comentario_asJson(request):
+    b = request.GET.get('buscar')
+    # b = "E1444628579"
+    data = Comentarios.objects.get_comentario_as_json(b)
+    data_to_jdt = {'data': list(data)}
+    return JsonResponse(data_to_jdt, safe=False)
