@@ -32,8 +32,6 @@
             </thead>
           </table>
 
-      </div>  
-    </div>
 
         {% else %}
 
@@ -50,9 +48,22 @@
               </tr>
             </thead>
           </table>
-                    {% endif %}
+          {% else %}
 
-                    {% endif %}
+          {{ user.prof.cedula }}
+            <table id="tableClient" >
+            <thead>
+              <tr>
+                  <th># Guía</th>
+                  <th>Fecha</th>
+                  <th>Estado</th>
+              </tr>
+            </thead>
+          </table>
+
+          
+          {% endif %}
+          {% endif %}
 
                 </div>  
               </div>
@@ -102,10 +113,43 @@
            } );
        } );
 
+        $(document).ready(function() {
+           $('#tableClient').dataTable( {
+               "processing": true,
+               "ajax": {
+                   "processing": true,
+                   "url": "{% url 'solicitudes:get_client_todas' %}",
+               },
+               "columnDefs": [
+            {
+                // The `data` parameter refers to the data for the cell (defined by the
+                // `data` option, which defaults to the column being worked with, in
+                // this case `data: 0`.
+                "render": function ( data, type, row ) {
+                    return data + '   ' +'<button type="button" class="btn btn-default btn-right" onClick="takeDataC(this)">Modificar</button>'
+                },
+                "targets": 1
+            },
+        ],
+               "columns": [
+                       { "data": "guia" },
+                       { "data": "dir_origen" },
+                       { "data": "dir_destino" }
+
+                   ]
+           } );
+       } );
+
       function takeData(dato) {
         var Dato = $(dato).parent().parent().find(".sorting_1").html(); 
         mensajero = {{ request.user.pk }};
         var url = "/solicitudes/asignarme"
+        window.location.replace(url+"?busqueda=" + Dato)    
+        }
+
+        function takeDataC(dato) {
+        var Dato = $(dato).parent().parent().find(".sorting_1").html(); 
+        var url = "/solicitudes/actualizar/"
         window.location.replace(url+"?busqueda=" + Dato)    
         }
     </script>

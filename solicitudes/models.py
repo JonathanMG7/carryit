@@ -10,6 +10,7 @@ TRAMITE = "TRAMITE"
 PENDIENTE = "PENDIENTE"
 EN_PROCESO = "EN_PROCESO"
 ENTREGADO = "ENTREGADO"
+CANCELADO = "CANCELADO"
 
 # cada tupla tiene esta estrucura: (DATO_EN_DB, DATO_MIRA_USUARIO)
 TIPO_SOLICITUD = (
@@ -21,12 +22,13 @@ ESTADO_SOLICITUD = (
     (PENDIENTE, 'Pendiente'),
     (EN_PROCESO, 'En proceso'),
     (ENTREGADO, 'Entregado'),
+    (ENTREGADO, 'Cancelado'),
     )
 
 class SolicitudManager(models.Manager):
 
     def get_by_client_id(self, client_id):
-        return self.filter(id_cliente=client_id)
+        return self.filter(id_cliente=client_id, estado="PENDIENTE").values("guia", "dir_origen", "dir_destino")
 
     def get_by_client_guia(self, guia):
         try:

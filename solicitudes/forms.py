@@ -25,10 +25,16 @@ class CambiaEstado(forms.ModelForm):
 
     class Meta:
         model = Solicitud
-        fields = ['tipo', 'guia', 'dir_origen', 'dir_destino', 'observaciones', 'estado']
+        fields = ['tipo', 'guia', 'dir_origen', 'dir_destino', 'estado']
 
 class NuevoComent(forms.ModelForm):
 
     class Meta:
         model = Comentarios
         fields = ['guia', 'comentario']
+
+class ClienteModifica(forms.ModelForm):
+
+    class Meta:
+        model = Solicitud
+        fields = ['guia', 'dir_origen', 'dir_destino', 'observaciones','estado']

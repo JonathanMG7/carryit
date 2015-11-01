@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from forms import SolicitudForm, ListaSolicitudes, SolicitudFormModif, CambiaEstado, NuevoComent
+from forms import SolicitudForm, ListaSolicitudes, SolicitudFormModif, CambiaEstado, NuevoComent, ClienteModifica
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
@@ -117,14 +117,11 @@ def cambiaestado(request):
             guia = form.cleaned_data['guia']
             dir_origen = form.cleaned_data['dir_origen']
             dir_destino = form.cleaned_data['dir_destino']
-            observaciones = form.cleaned_data['observaciones']
             estado = form.cleaned_data['estado']
             mod.tipo = tipo
             mod.guia = guia
             mod.dir_origen = dir_origen
             mod.dir_destino = dir_destino
-            mod.observaciones = observaciones
-            form2.comentario = observaciones
             mod.estado = estado
             mod.save()
             if request.POST['comentario'] != "":
@@ -148,7 +145,45 @@ def cambiaestado(request):
 
 def get_comentario_asJson(request):
     b = request.GET.get('buscar')
-    # b = "E1444628579"
     data = Comentarios.objects.get_comentario_as_json(b)
     data_to_jdt = {'data': list(data)}
     return JsonResponse(data_to_jdt, safe=False)
+
+@login_required
+def get_client_todas(request):
+    b = request.user.prof.cedula
+    data = Solicitud.objects.get_by_client_id(b)
+    data_to_jdt = {'data': list(data)}
+    return JsonResponse(data_to_jdt, safe=False)
+
+def actualizar(request):
+    guia = request.GET['busqueda']
+    mod = Solicitud.objects.get(guia=guia)
+    variable = mod.guia
+    if request.method =='POST':
+        form = ClienteModifica(request.POST,request.FILES)
+        if form.is_valid():
+            guia = form.cleaned_data['guia']
+            dir_origen = form.cleaned_data['dir_origen']
+            dir_destino = form.cleaned_data['dir_destino']
+            observaciones = form.cleaned_data['observaciones']
+            estado = form.cleaned_data['estado']
+            mod.guia = guia
+            mod.dir_origen = dir_origen
+            mod.dir_destino = dir_destino
+            mod.comentario = observaciones
+            mod.estado = estado
+            mod.save()
+            return HttpResponseRedirect('/solicitudes/lista/')
+    if request.method == 'GET':
+        form = ClienteModifica(initial={
+                                'guia':mod.guia,
+                                'dir_origen':mod.dir_origen,
+                                'dir_destino':mod.dir_destino,
+                                'observaciones':mod.observaciones,
+                                'estado':mod.estado
+
+            })
+    
+    ctx = {'form': form, 'Solicitud': mod}
+    return render(request, "modifica.html",  locals())

@@ -15,4 +15,6 @@ urlpatterns = (
     url(r'^listasmsj/', views.lista_asJson_msj, name='listasmsj'),
     url(r'^listas_msj/', views.lista_msj, name='listas_msj'),
     url(r'^get_comentario_asJson/$', views.get_comentario_asJson, name='get_comentario_asJson'),
+    url(r'^get_client_todas/', views.get_client_todas, name="get_client_todas"),
+    url(r'^actualizar/', views.actualizar, name="actualizar"),
 )
