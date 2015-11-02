@@ -22,7 +22,7 @@ ESTADO_SOLICITUD = (
     (PENDIENTE, 'Pendiente'),
     (EN_PROCESO, 'En proceso'),
     (ENTREGADO, 'Entregado'),
-    (ENTREGADO, 'Cancelado'),
+    (CANCELADO, 'Cancelado'),
     )
 
 class SolicitudManager(models.Manager):

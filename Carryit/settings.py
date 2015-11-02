@@ -109,5 +109,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/sign/in'
-
-MEDIA_URL = '/media/'

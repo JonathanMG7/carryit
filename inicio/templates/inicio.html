@@ -34,18 +34,19 @@
           <h3>¿En qué te podemos servir?</h3>
           <div id="buttonsRedirect">
           <p>
-          <a href="/solicitudes/"><button type="button" class="btn btn-lg btn-success">Crear solicitud</button></a>
+          <a href="/solicitudes/"><button type="button" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Crear solicitud</button></a>
 
           {% if user.is_authenticated %}
           {% if user.is_superuser %}
-          <a href="/solicitudes/lista/"><button type="button" class="btn btn-lg btn-success">Mostrar solicitudes</button></a>
-          <a href="/admin/"><button type="button" class="btn btn-lg btn-warning">Admin</button></a>
+          <a href="/solicitudes/lista/"><button type="button" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Mostrar solicitudes</button></a>
+          <a href="/admin/"><button type="button" class="btn btn-lg btn-warning"><span class="
+glyphicon glyphicon-wrench" aria-hidden="true"></span> Admin</button></a>
           {% endif %}
           {% else %}
-          <a href="/sign/client/"><button type="button" class="btn btn-lg btn-warning">Registrarse</button></a>
+          <a href="/sign/client/"><button type="button" class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrarse</button></a>
           {% endif %}
 
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             Busca por Guía
           </button>
 <!-- modal form, busqueda por guia -->

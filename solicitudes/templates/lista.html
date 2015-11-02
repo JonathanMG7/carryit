@@ -36,8 +36,11 @@
         {% else %}
 
         {% if request.user.groups.all.0.name == 'Mensajero' %}
-        <div class="span6">
-          <a href="/solicitudes/listas_msj/"><button type="button" class="btn btn-lg btn-warning">Mi lista</button></a>
+        <div class="centerButtons">
+                  <p class="centerButtons">
+          Id Mensajero: {{ user.pk }}
+          </p>
+          <a href="/solicitudes/listas_msj/" ><button type="button" class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Mi lista de solicitudes</button></a>
           <hr>
           </div>
           <table id="tableMsj" >
@@ -49,8 +52,9 @@
             </thead>
           </table>
           {% else %}
-
-          {{ user.prof.cedula }}
+          <p class="centerButtons">
+          Id usiario: {{ user.prof.cedula }}
+          </p>
             <table id="tableClient" >
             <thead>
               <tr>
@@ -100,7 +104,7 @@
                 // `data` option, which defaults to the column being worked with, in
                 // this case `data: 0`.
                 "render": function ( data, type, row ) {
-                    return data + '   ' +'<button type="button" class="btn btn-default btn-right" onClick="takeData(this)">Tomar</button>'
+                    return data + '   ' +'<button type="button" class="btn btn-default btn-right" onClick="takeData(this)"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Tomar</button>'
                 },
                 "targets": 1
             },
@@ -126,7 +130,7 @@
                 // `data` option, which defaults to the column being worked with, in
                 // this case `data: 0`.
                 "render": function ( data, type, row ) {
-                    return data + '   ' +'<button type="button" class="btn btn-default btn-right" onClick="takeDataC(this)">Modificar</button>'
+                    return data + '   ' +'<button type="button" class="btn btn-default btn-right glyphicon glyphicon-pencil" onClick="takeDataC(this)"></button>'
                 },
                 "targets": 1
             },
